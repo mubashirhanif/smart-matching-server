@@ -14,11 +14,6 @@ userExpressRoute.route('/').get((req, res) => {
             return next(error)
         } else {
             res.json(data)
-            /* res.json({
-                name: 'Mubashir',
-                email: 'mubashirhanif93@gmail.com',
-                dob: '25.11.1993'
-            }) */
         }
     })
 })
