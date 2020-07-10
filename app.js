@@ -19,14 +19,21 @@ mongoose.connect(dbConfig.db, {
         console.log('Database could not be connected : ' + error)
     }
 )
-
+const corsOptions = {
+    origin: true,
+    'Access-Control-Allow-Credentials': true,
+    'Access-Control-Allow-Origin': true,
+    'Access-Control-Allow-Headers': true,
+    'Access-Control-Expose-Headers': true,
+    credentials: true
+  }
 // Setting up express
 const app = express();
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-app.use(cors());
 
 // Api root
 const userRoute = require('./routes/user.route')
