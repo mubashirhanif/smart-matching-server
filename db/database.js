@@ -1,3 +1,3 @@
 module.exports = {
-    db: 'mongodb://localhost:27017/smartmatch',
+    db: process.env.MONGO_LINK,
 }
