@@ -39,6 +39,10 @@ app.use(bodyParser.urlencoded({
 const userRoute = require('./routes/user.route')
 app.use('/users', userRoute)
 
+const loginRoute = require('./routes/authentication.route')
+app.use('/authentication', loginRoute)
+
+
 // Create port
 const port = process.env.PORT || 8080;
 

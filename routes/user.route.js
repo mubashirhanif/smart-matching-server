@@ -17,7 +17,8 @@ userExpressRoute.route('/').get((req, res) => {
         }
     })
 })
-
+// todo: the RESTful URI should refer to a resource that is a thing (noun)
+//   but here is verb!
 // Create user
 userExpressRoute.route('/create-user').post((req, res, next) => {
     UserSchema.create(req.body, (error, data) => {
