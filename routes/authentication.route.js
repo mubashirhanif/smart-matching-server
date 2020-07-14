@@ -1,7 +1,15 @@
+/**
+ * @author Shutao Shen
+ * @type {createApplication}
+ */
 const express = require('express');
 
 // Express route
 const router = express.Router();
+/**
+ * how to register an authentication(here only handle the name password)
+ * the profile is not in this route
+ */
 
 let Authentication = require('../models/authentication.model');
 
@@ -12,11 +20,17 @@ const sha1 = require('sha1')
 const createToken = require('../middlewares/createToken')
 const checkToken = require('../middlewares/checkToken')
 
-/**
- * how to register an authentication(here only handle the name password)
- * the profile is not in this route
- */
 
+/**
+ * register schema:
+ * post: /authentication/
+    {
+        "name":"sst",
+        "password":"pass"
+    }
+ * @param req
+ * @param res
+ */
 const handleRegister = (req, res) => {
     console.log("handleRegister")
     let authRegister = new Authentication({
@@ -50,6 +64,15 @@ const handleRegister = (req, res) => {
         })
         .catch(err => res.json(err))
 }
+/**
+ * login schema:
+ *  post: /authentication/sst
+ *  {
+        "password":"pass"
+    }
+ * @param req
+ * @param res
+ */
 const handleLogin = (req, res) => {
     let authLogin = new Authentication({
         name: req.params.name,
@@ -87,8 +110,10 @@ const handleLogin = (req, res) => {
         })
         .catch(err => res.json(err))
 }
+// todo: add methods like "change password" ....
+
 /**
- *  the path is /authentication
+ *  the relative path is /authentication
  * @param router
  */
 router.route('/').post( handleRegister);
