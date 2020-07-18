@@ -2,7 +2,6 @@ const express = require("express");
 
 // Express route
 const userRouter = express.Router();
-// userRouter.route("/", userRouter);
 // User schema
 let UserSchema = require("../src/models/user.model");
 
