@@ -11,14 +11,14 @@ const router = express.Router();
  * the profile is not in this route
  */
 
-let Authentication = require('../models/authentication.model');
+let Authentication = require('../src/models/authentication.model');
 
 const moment = require('moment')
 const objectIdToTimestamp = require('objectid-to-timestamp')
 const sha1 = require('sha1')
 
-const createToken = require('../middlewares/createToken')
-const checkToken = require('../middlewares/checkToken')
+const createToken = require('./middlewares/createToken')
+const checkToken = require('./middlewares/checkToken')
 
 
 /**
