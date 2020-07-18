@@ -10,9 +10,16 @@ let userSchema = new Schema({
     },
     dob: {
         type: Date
+    },
+    address: {
+        type: String
+    },
+    idDocument: {
+        data: Buffer,
+        contentType: String
     }
 }, {
     collection: 'users'
 })
 
-module.exports = mongoose.model('userSchema', userSchema)
+module.exports = mongoose.model('User', userSchema)
