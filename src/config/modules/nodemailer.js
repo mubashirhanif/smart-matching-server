@@ -17,6 +17,22 @@ const smtpTransport = nodemailer.createTransport(
   })
 );
 
+let sendEmail = (userEmail, subject, templateName = "") => {
+  const mailOptions = {
+    from: config.emailAddress, // sender address
+    to: userEmail, // list of receivers
+    subject: subject, // Subject line
+    html: `<h1>User with email ${userEmail} registered</h1>` // html body
+  };
+
+  smtpTransport.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message sent: ' + info.response);
+  });
+}
+
 module.exports = {
-  smtpTransport,
+  sendEmail
 };
