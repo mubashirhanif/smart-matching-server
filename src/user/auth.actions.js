@@ -12,17 +12,18 @@ actions.registerUser = (req, res, next) => {
         (error, user) => {
             if (error) {
                 logger.debug(`[Register User] Failed with error: ${error.message}`);
+                res.formatter.badRequest(error.message)
                 return next(error);
             }
             passport.authenticate('local')(req, res, () => {
-                res.json(req.user);
+                res.formatter.ok(user)
             });
         });
 };
 
 actions.login = (req, res, next) => {
     passport.authenticate('local')(req, res, () => {
-        res.json(req.user);
+        res.formatter.ok(req.user);
     });
 };
 
@@ -34,13 +35,15 @@ actions.logout = (req, res, next) => {
                 logger.debug(`[Logout User] Failed with error: ${error.message}`);
             } else {
                 res.clearCookie('session-id');
-                res.json({
+
+                res.formatter.ok({
                     message: 'You are successfully logged out!'
                 });
             }
         });
     } else {
         logger.debug(`[Logout User] Failed with error: session not found`);
+        res.formatter.forbidden("Session not found");
         next(err);
     }
 };

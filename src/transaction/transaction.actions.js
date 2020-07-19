@@ -10,9 +10,10 @@ actions.getTransactions = (req, res, next) => {
     Transaction.find((error, data) => {
         if (error) {
             logger.debug(`[Search Transaction] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -23,9 +24,10 @@ actions.getTransaction = (req, res, next) => {
     Transaction.findById(req.params.id, (error, data) => {
         if (error) {
             logger.debug(`[Get Transaction] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -36,9 +38,10 @@ actions.createTransaction = (req, res, next) => {
     Transaction.create(req.body, (error, data) => {
         if (error) {
             logger.debug(`[Create Transaction] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -57,9 +60,10 @@ actions.updateTransaction = (req, res, next) => {
         (error, data) => {
             if (error) {
                 logger.debug(`[Update Transaction] Failed with error: ${error.message}`);
+                res.formatter.notFound(error.message)
                 return next(error);
             } else {
-                res.json(data);
+                res.formatter.ok(data)
             }
         }
     );
@@ -71,9 +75,10 @@ actions.deleteTransaction = (req, res, next) => {
     Transaction.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             logger.debug(`[Delete Transaction] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };

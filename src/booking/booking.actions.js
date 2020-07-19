@@ -10,9 +10,10 @@ actions.getBookings = (req, res, next) => {
   Booking.find((error, data) => {
     if (error) {
       logger.debug(`[Search Booking] Failed with error: ${error.message}`);
+      res.formatter.notFound(error.message)
       return next(error);
     } else {
-      res.json(data);
+      res.formatter.ok(data)
     }
   });
 };
@@ -22,9 +23,10 @@ actions.getBooking = (req, res, next) => {
   Booking.findById(req.params.id, (error, data) => {
     if (error) {
       logger.debug(`[Get Booking] Failed with error: ${error.message}`);
+      res.formatter.notFound(error.message)
       return next(error);
     } else {
-      res.json(data);
+      res.formatter.ok(data)
     }
   });
 };
@@ -35,9 +37,10 @@ actions.createBooking = (req, res, next) => {
   Booking.create(req.body, (error, data) => {
     if (error) {
       logger.debug(`[Create Booking] Failed with error: ${error.message}`);
+      res.formatter.notFound(error.message)
       return next(error);
     } else {
-      res.json(data);
+      res.formatter.ok(data)
     }
   });
 };
@@ -56,9 +59,10 @@ actions.updateBooking = (req, res, next) => {
     (error, data) => {
       if (error) {
         logger.debug(`[Update Booking] Failed with error: ${error.message}`);
+        res.formatter.notFound(error.message)
         return next(error);
       } else {
-        res.json(data);
+        res.formatter.ok(data)
       }
     }
   );
@@ -70,9 +74,10 @@ actions.deleteBooking = (req, res, next) => {
   Booking.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       logger.debug(`[Delete Booking] Failed with error: ${error.message}`);
+      res.formatter.notFound(error.message)
       return next(error);
     } else {
-      res.json(data);
+      res.formatter.ok(data)
     }
   });
 };
