@@ -5,7 +5,7 @@ const { logger } = require("../config");
 const actions = {};
 
 //GET method search tags by keyword or tags.
-tagactions.getTags = (req, res, next) => {
+actions.getTags = (req, res, next) => {
     // TODO: use req.keywords, req.tags
     Tag.find((error, data) => {
         if (error) {
