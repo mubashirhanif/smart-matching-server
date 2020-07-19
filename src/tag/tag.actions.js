@@ -10,9 +10,10 @@ actions.getTags = (req, res, next) => {
     Tag.find((error, data) => {
         if (error) {
             logger.debug(`[Search Tag] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -22,9 +23,10 @@ actions.getTag = (req, res, next) => {
     Tag.findById(req.params.id, (error, data) => {
         if (error) {
             logger.debug(`[Get Tag] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -35,9 +37,10 @@ actions.createTag = (req, res, next) => {
     Tag.create(req.body, (error, data) => {
         if (error) {
             logger.debug(`[Create Tag] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -56,9 +59,10 @@ actions.updateTag = (req, res, next) => {
         (error, data) => {
             if (error) {
                 logger.debug(`[Update Tag] Failed with error: ${error.message}`);
+                res.formatter.notFound(error.message)
                 return next(error);
             } else {
-                res.json(data);
+                res.formatter.ok(data)
             }
         }
     );
@@ -70,9 +74,10 @@ actions.deleteTag = (req, res, next) => {
     Tag.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             logger.debug(`[Delete Tag] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };

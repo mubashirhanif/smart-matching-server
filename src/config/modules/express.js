@@ -10,6 +10,7 @@ const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require("../../user/user.model");
+const responseEnhancer = require('express-response-formatter');
 
 /**
  * Express configuration
@@ -47,6 +48,7 @@ const init = () => {
 
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(responseEnhancer.responseEnhancer())
   return app;
 };
 
