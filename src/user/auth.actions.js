@@ -13,26 +13,16 @@ actions.registerUser = (req, res, next) => {
             if (error) {
                 logger.debug(`[Register User] Failed with error: ${error.message}`);
                 return next(error);
-            } else {
-                passport.authenticate('local')(req, res, () => {
-                    User.findOne({
-                        username: req.body.username
-                    }, (error, authenticatedUser) => {
-                        emailModule.sendEmail(req.body.email, `Hello ${req.body.firstName}`)
-                        res.json(authenticatedUser);
-                    });
-                });
             }
+            passport.authenticate('local')(req, res, () => {
+                res.json(req.user);
+            });
         });
 };
 
 actions.login = (req, res, next) => {
     passport.authenticate('local')(req, res, () => {
-        User.findOne({
-            username: req.body.username
-        }, (error, authenticatedUser) => {
-            res.json(authenticatedUser);
-        });
+        res.json(req.user);
     });
 };
 
