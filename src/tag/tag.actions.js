@@ -17,8 +17,7 @@ actions.getTags = (req, res, next) => {
     });
 };
 
-
-// Get single transaction
+// Get single tag
 actions.getTag = (req, res, next) => {
     Tag.findById(req.params.id, (error, data) => {
         if (error) {

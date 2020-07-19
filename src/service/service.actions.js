@@ -5,11 +5,23 @@ const { logger } = require("../config");
 const actions = {};
 
 //GET method search services by keyword or tags.
-actions.searchServices = (req, res, next) => {
+actions.getServices = (req, res, next) => {
   // TODO: use req.keywords, req.tags
   Service.find((error, data) => {
     if (error) {
       logger.debug(`[Search Service] Failed with error: ${error.message}`);
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  });
+};
+
+// Get single service
+actions.getService = (req, res, next) => {
+  Service.findById(req.params.id, (error, data) => {
+    if (error) {
+      logger.debug(`[Get Service] Failed with error: ${error.message}`);
       return next(error);
     } else {
       res.json(data);
