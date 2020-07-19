@@ -5,11 +5,23 @@ const { logger } = require("../config");
 const actions = {};
 
 //GET method search bookings by keyword or tags.
-actions.searchBookings = (req, res, next) => {
+actions.getBookings = (req, res, next) => {
   // TODO: use req.keywords, req.tags
   Booking.find((error, data) => {
     if (error) {
       logger.debug(`[Search Booking] Failed with error: ${error.message}`);
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  });
+};
+
+// Get single booking
+actions.getBooking = (req, res, next) => {
+  Booking.findById(req.params.id, (error, data) => {
+    if (error) {
+      logger.debug(`[Get Booking] Failed with error: ${error.message}`);
       return next(error);
     } else {
       res.json(data);
