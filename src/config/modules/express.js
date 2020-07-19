@@ -48,6 +48,7 @@ const init = () => {
 
   app.use(passport.initialize());
   app.use(passport.session());
+
   app.use(responseEnhancer.responseEnhancer())
   return app;
 };

@@ -35,6 +35,7 @@ actions.logout = (req, res, next) => {
                 logger.debug(`[Logout User] Failed with error: ${error.message}`);
             } else {
                 res.clearCookie('session-id');
+
                 res.formatter.ok({
                     message: 'You are successfully logged out!'
                 });
