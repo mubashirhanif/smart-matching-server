@@ -50,6 +50,10 @@ actions.updateUser = (req, res, next) => {
         {
             $set: req.body,
         },
+        {
+            // Returning the updated object
+            new: true
+        },
         (error, data) => {
             if (error) {
                 logger.debug(`[Update User] Failed with error: ${error.message}`);

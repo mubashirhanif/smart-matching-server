@@ -38,6 +38,9 @@ actions.updateTransaction = (req, res, next) => {
         {
             $set: req.body,
         },
+        {
+            new: true
+        },
         (error, data) => {
             if (error) {
                 logger.debug(`[Update Transaction] Failed with error: ${error.message}`);

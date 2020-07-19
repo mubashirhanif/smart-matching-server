@@ -38,6 +38,9 @@ actions.updateReview = (req, res, next) => {
         {
             $set: req.body,
         },
+        {
+            new: true
+        },
         (error, data) => {
             if (error) {
                 logger.debug(`[Update Review] Failed with error: ${error.message}`);
