@@ -8,7 +8,7 @@ let tagSchema = new Schema(
         name: {
             type: String,
         },
-        creator: {
+        createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
