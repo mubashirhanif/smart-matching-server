@@ -5,11 +5,24 @@ const { logger } = require("../config");
 const actions = {};
 
 //GET method search transactions by keyword or tags.
-actions.searchTransactions = (req, res, next) => {
+actions.getTransactions = (req, res, next) => {
     // TODO: use req.keywords, req.tags
     Transaction.find((error, data) => {
         if (error) {
             logger.debug(`[Search Transaction] Failed with error: ${error.message}`);
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    });
+};
+
+
+// Get single transaction
+actions.getTransaction = (req, res, next) => {
+    Transaction.findById(req.params.id, (error, data) => {
+        if (error) {
+            logger.debug(`[Get Transaction] Failed with error: ${error.message}`);
             return next(error);
         } else {
             res.json(data);
