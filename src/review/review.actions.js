@@ -5,11 +5,23 @@ const { logger } = require("../config");
 const actions = {};
 
 //GET method search reviews by keyword or tags.
-actions.searchReviews = (req, res, next) => {
+actions.getReviews = (req, res, next) => {
     // TODO: use req.keywords, req.tags
     Review.find((error, data) => {
         if (error) {
             logger.debug(`[Search Review] Failed with error: ${error.message}`);
+            return next(error);
+        } else {
+            res.json(data);
+        }
+    });
+};
+
+// Get single review
+actions.getReview = (req, res, next) => {
+    Review.findById(req.params.id, (error, data) => {
+        if (error) {
+            logger.debug(`[Get Review] Failed with error: ${error.message}`);
             return next(error);
         } else {
             res.json(data);
