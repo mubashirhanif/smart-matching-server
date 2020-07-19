@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development MONGO_LINK=mongodb://localhost:27017/smartmatch PORT=8080 nodemon app.js",
+    "start": "cross-env NODE_ENV=development MONGO_LINK=mongodb://localhost:27017/smartmatch PORT=8080 EMAIL_ADDRESS=matchingsmart@gmail.com EMAIL_PASS=Sch3m3@33 nodemon app.js",
     "test": "cross-env NODE_ENV=development MONGO_LINK=mongodb://localhost:27017/smartmatch PORT=8080 mocha --exit --reporter spec \"src/*/*.test.js\""
   },
   "repository": {
