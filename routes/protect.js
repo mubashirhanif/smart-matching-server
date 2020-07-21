@@ -7,7 +7,7 @@ const protect = (req, res, next) => {
         return next()
     }
     logger.debug(`Not authorized request!`);
-    res.status(401).send('Not authorized request!')
+    res.formatter.unauthorized('User is not logged in')
 }
 
 module.exports = protect

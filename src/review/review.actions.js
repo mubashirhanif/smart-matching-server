@@ -10,9 +10,10 @@ actions.getReviews = (req, res, next) => {
     Review.find((error, data) => {
         if (error) {
             logger.debug(`[Search Review] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -22,9 +23,10 @@ actions.getReview = (req, res, next) => {
     Review.findById(req.params.id, (error, data) => {
         if (error) {
             logger.debug(`[Get Review] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -35,9 +37,10 @@ actions.createReview = (req, res, next) => {
     Review.create(req.body, (error, data) => {
         if (error) {
             logger.debug(`[Create Review] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
@@ -56,9 +59,10 @@ actions.updateReview = (req, res, next) => {
         (error, data) => {
             if (error) {
                 logger.debug(`[Update Review] Failed with error: ${error.message}`);
+                res.formatter.notFound(error.message)
                 return next(error);
             } else {
-                res.json(data);
+                res.formatter.ok(data)
             }
         }
     );
@@ -70,9 +74,10 @@ actions.deleteReview = (req, res, next) => {
     Review.findByIdAndRemove(req.params.id, (error, data) => {
         if (error) {
             logger.debug(`[Delete Review] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
             return next(error);
         } else {
-            res.json(data);
+            res.formatter.ok(data)
         }
     });
 };
