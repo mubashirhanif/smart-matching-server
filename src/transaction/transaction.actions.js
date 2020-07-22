@@ -6,30 +6,29 @@ const actions = {};
 
 //GET method search transactions by keyword or tags.
 actions.getTransactions = (req, res, next) => {
-    // TODO: use req.keywords, req.tags
-    Transaction.find((error, data) => {
-        if (error) {
-            logger.debug(`[Search Transaction] Failed with error: ${error.message}`);
-            res.formatter.notFound(error.message)
-            return next(error);
-        } else {
-            res.formatter.ok(data)
-        }
-    });
+  // TODO: use req.keywords, req.tags
+  Transaction.find((error, data) => {
+    if (error) {
+      logger.debug(`[Search Transaction] Failed with error: ${error.message}`);
+      res.formatter.notFound(error.message);
+      return next(error);
+    } else {
+      res.formatter.ok(data);
+    }
+  });
 };
-
 
 // Get single transaction
 actions.getTransaction = (req, res, next) => {
-    Transaction.findById(req.params.id, (error, data) => {
-        if (error) {
-            logger.debug(`[Get Transaction] Failed with error: ${error.message}`);
-            res.formatter.notFound(error.message)
-            return next(error);
-        } else {
-            res.formatter.ok(data)
-        }
-    });
+  Transaction.findById(req.params.id, (error, data) => {
+    if (error) {
+      logger.debug(`[Get Transaction] Failed with error: ${error.message}`);
+      res.formatter.notFound(error.message);
+      return next(error);
+    } else {
+      res.formatter.ok(data);
+    }
+  });
 };
 
 //Create transaction using all the parameters
