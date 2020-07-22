@@ -1,6 +1,6 @@
 const express = require("express");
 const bookingActions = require("../src/booking");
-const protect = require('./protect')
+const protect = require("./middlewares/protect");
 
 // Express route
 const bookingRouter = express.Router();

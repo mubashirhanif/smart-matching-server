@@ -33,55 +33,53 @@ actions.getTransaction = (req, res, next) => {
 
 //Create transaction using all the parameters
 actions.createTransaction = (req, res, next) => {
-  // req.body has all the parameters.
-  Transaction.create(req.body, (error, data) => {
-    if (error) {
-      logger.debug(`[Create Transaction] Failed with error: ${error.message}`);
-      res.formatter.notFound(error.message);
-      return next(error);
-    } else {
-      res.formatter.ok(data);
-    }
-  });
+    // req.body has all the parameters.
+    Transaction.create(req.body, (error, data) => {
+        if (error) {
+            logger.debug(`[Create Transaction] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
+            return next(error);
+        } else {
+            res.formatter.ok(data)
+        }
+    });
 };
 
 //Update transaction using all the parameters
 // req.param.id
 actions.updateTransaction = (req, res, next) => {
-  Transaction.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: req.body,
-    },
-    {
-      new: true,
-    },
-    (error, data) => {
-      if (error) {
-        logger.debug(
-          `[Update Transaction] Failed with error: ${error.message}`
-        );
-        res.formatter.notFound(error.message);
-        return next(error);
-      } else {
-        res.formatter.ok(data);
-      }
-    }
-  );
+    Transaction.findByIdAndUpdate(
+        req.params.id,
+        {
+            $set: req.body,
+        },
+        {
+            new: true
+        },
+        (error, data) => {
+            if (error) {
+                logger.debug(`[Update Transaction] Failed with error: ${error.message}`);
+                res.formatter.notFound(error.message)
+                return next(error);
+            } else {
+                res.formatter.ok(data)
+            }
+        }
+    );
 };
 
 // Delete transaction
 actions.deleteTransaction = (req, res, next) => {
-  //
-  Transaction.findByIdAndRemove(req.params.id, (error, data) => {
-    if (error) {
-      logger.debug(`[Delete Transaction] Failed with error: ${error.message}`);
-      res.formatter.notFound(error.message);
-      return next(error);
-    } else {
-      res.formatter.ok(data);
-    }
-  });
+    //
+    Transaction.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            logger.debug(`[Delete Transaction] Failed with error: ${error.message}`);
+            res.formatter.notFound(error.message)
+            return next(error);
+        } else {
+            res.formatter.ok(data)
+        }
+    });
 };
 
 module.exports = actions;

@@ -1,7 +1,7 @@
 const express = require("express");
 const userActions = require("../src/user/user.actions");
 const authActions = require("../src/user/auth.actions");
-const protect = require('./protect')
+const protect = require("./middlewares/protect");
 
 // Express route
 const userRouter = express.Router();
@@ -9,7 +9,7 @@ const userRouter = express.Router();
 userRouter.post("/", authActions.registerUser);
 userRouter.post("/login", authActions.login);
 userRouter.get("/logout", authActions.logout);
-
+userRouter.post("/verifylogin", authActions.verifyLoggedInStatus);
 
 userRouter.get("/", protect, userActions.getUsers);
 userRouter.get("/:id", protect, userActions.getUser);

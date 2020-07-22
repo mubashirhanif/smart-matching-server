@@ -26,8 +26,8 @@ const development = {
   emailAddress: process.env.EMAIL_ADDRESS,
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: process.env.MONGO_LINK,
-  clientStaticFolder: path.join(basePath, "client/build/static"),
-  clientBuildFolder: path.join(basePath, "client/build"),
+  clientStaticFolder: path.join(basePath, "client/static"),
+  clientBuildFolder: path.join(basePath, "client/"),
 };
 
 /**
@@ -42,8 +42,8 @@ const production = {
   emailAddress: process.env.EMAIL_ADDRESS,
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: process.env.MONGO_LINK,
-  clientStaticFolder: path.join(basePath, "client/build/static"),
-  clientBuildFolder: path.join(basePath, "client/build"),
+  clientStaticFolder: path.join(basePath, "client/static"),
+  clientBuildFolder: path.join(basePath, "client/"),
 };
 
 
@@ -60,8 +60,8 @@ const test = {
   emailAddress: process.env.EMAIL_ADDRESS,
   emailPassword: process.env.EMAIL_PASS,
   mongoUrl: process.env.MONGO_LINK,
-  clientStaticFolder: path.join(basePath, "client/build/static"),
-  clientBuildFolder: path.join(basePath, "client/build"),
+  clientStaticFolder: path.join(basePath, "client/static"),
+  clientBuildFolder: path.join(basePath, "client/"),
 };
 
 const config = {
