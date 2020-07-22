@@ -11,9 +11,12 @@ actions.registerUser = (req, res, next) => {
     if (error) {
       logger.debug(`[Register User] Failed with error: ${error.message}`);
       res.formatter.badRequest(error.message);
-      return next(error);
     }
     passport.authenticate("local")(req, res, () => {
+      emailModule.sendEmail(
+        user.email,
+        "Thank you for registering with Smart Matching"
+      );
       res.formatter.ok(user);
     });
   });
@@ -42,7 +45,15 @@ actions.logout = (req, res, next) => {
   } else {
     logger.debug(`[Logout User] Failed with error: session not found`);
     res.formatter.forbidden("Session not found");
-    next(err);
+  }
+};
+
+actions.verifyLoggedInStatus = (req, res, next) => {
+  logger.debug("[Verify Logged In Status] verifying logged in status...");
+  if (req.isAuthenticated()) {
+    res.formatter.ok(req.user);
+  } else {
+    res.formatter.unauthorized("User is not logged in");
   }
 };
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const serviceActions = require("../src/service");
-const protect = require('./protect')
+const protect = require("./middlewares/protect");
 
 // Express route
 const serviceRouter = express.Router();

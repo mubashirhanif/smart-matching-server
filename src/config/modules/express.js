@@ -26,8 +26,8 @@ const init = () => {
     "Access-Control-Expose-Headers": true,
     credentials: true,
   };
-  app.use("/build/static", express.static(config.clientStaticFolder));
-  app.use("/build", express.static(config.clientBuildFolder));
+  app.use("/static", express.static(config.clientStaticFolder));
+  app.use("/", express.static(config.clientBuildFolder));
   app.set("views", config.clientBuildFolder);
   app.engine("html", require("ejs").renderFile); // need ejs to render html files in production
   app.set("view engine", "html");
