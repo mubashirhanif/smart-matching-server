@@ -1,6 +1,6 @@
 const express = require("express");
 const tagActions = require("../src/tag");
-const protect = require('./protect')
+const protect = require("./middlewares/protect");
 
 // Express route
 const tagRouter = express.Router();

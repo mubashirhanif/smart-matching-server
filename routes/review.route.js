@@ -1,6 +1,6 @@
 const express = require("express");
 const reviewActions = require("../src/review");
-const protect = require('./protect')
+const protect = require("./middlewares/protect");
 
 // Express route
 const reviewRouter = express.Router();

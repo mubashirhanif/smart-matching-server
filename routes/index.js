@@ -1,11 +1,12 @@
 "use strict";
 
-const userRoutes = require("./user.route");
-const serviceRoutes = require("./service.route");
+const viewRoutes = require("./view.route");
 const bookingRoutes = require("./booking.route");
-const transactionRoutes = require("./transaction.route");
-const tagRoutes = require("./tag.route");
 const reviewRoutes = require("./review.route");
+const serviceRoutes = require("./service.route");
+const tagRoutes = require("./tag.route");
+const transactionRoutes = require("./transaction.route");
+const userRoutes = require("./user.route");
 
 /**
  * Initializing routes
@@ -18,6 +19,7 @@ const init = (app) => {
   app.use("/api/transaction", transactionRoutes);
   app.use("/api/tag", tagRoutes);
   app.use("/api/review", reviewRoutes);
+  app.use("*", viewRoutes);
 };
 
 module.exports = {
