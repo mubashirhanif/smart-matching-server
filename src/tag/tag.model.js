@@ -7,10 +7,13 @@ let tagSchema = new Schema(
     {
         name: {
             type: String,
+            unique: true,
+            require: true
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+            require: true
         },
     },
     {

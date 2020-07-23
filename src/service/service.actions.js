@@ -1,6 +1,7 @@
 "use strict";
 
 const Service = require("./service.model");
+const Tag = require("../tag/tag.model");
 const { logger } = require("../config");
 const actions = {};
 
@@ -32,11 +33,26 @@ actions.getService = (req, res, next) => {
 };
 
 //Create service using all the parameters
-actions.createService = (req, res, next) => {
-    // req.body has all the parameters.
+actions.createService = async (req, res, next) => {
+    const tags = req.body.tags;
+    let tagsIds = [];
+
+    for (const tagName in tags) {
+        let _tag = await Tag.findOneAndUpdate({
+            name: tagName.toLowerCase()
+        }, {
+            name: tagName.toLowerCase()
+        }, {
+            upsert: true,
+            new: true,
+            setDefaultsOnInsert: true
+        });
+        tagsIds.push(_tag._id);
+    }
+    req.body.tags = tagsIds;
+
     Service.create(req.body, (error, data) => {
         if (error) {
-            logger.debug(`[Create Service] Failed with error: ${error.message}`);
             res.formatter.notFound(error.message)
             return next(error);
         } else {
