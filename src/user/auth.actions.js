@@ -1,13 +1,24 @@
 "use strict";
 
+const fs = require("fs");
+const path = require("path");
+const passport = require("passport");
+
 const User = require("./user.model");
 const { logger } = require("../config");
-const passport = require("passport");
 const emailModule = require("../config/modules/nodemailer");
 const actions = {};
 
 actions.registerUser = (req, res, next) => {
-  User.register(new User(req.body), req.body.password, (error, user) => {
+  const url = req.protocol + "://" + req.get("host");
+  User.register(new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    username: req.body.username,
+    image: url + "/public/" + req.file.filename,
+    email: req.body.email,
+    password: req.body.password,
+  }), req.body.password, (error, user) => {
     if (error) {
       logger.debug(`[Register User] Failed with error: ${error.message}`);
       res.formatter.badRequest(error.message);
