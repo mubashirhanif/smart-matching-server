@@ -27,11 +27,12 @@ let userSchema = new Schema({
     address: {
         type: String
     },
+    image: {
+      type: String
+    },
     idDocument: {
-        data: Buffer,
-        contentType: String
-    }
-}, {
+        type: String
+    }}, {
     collection: 'users'
 })
 

@@ -6,11 +6,11 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const passport = require('passport');
-const session = require('express-session');
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require("passport");
+const session = require("express-session");
+const LocalStrategy = require("passport-local").Strategy;
 const User = require("../../user/user.model");
-const responseEnhancer = require('express-response-formatter');
+const responseEnhancer = require("express-response-formatter");
 
 /**
  * Express configuration
@@ -27,29 +27,33 @@ const init = () => {
     credentials: true,
   };
   app.use("/static", express.static(config.clientStaticFolder));
+  app.use("/public", express.static(config.serverUploadsFolder));
   app.use("/", express.static(config.clientBuildFolder));
   app.set("views", config.clientBuildFolder);
   app.engine("html", require("ejs").renderFile); // need ejs to render html files in production
   app.set("view engine", "html");
   app.use(cookieParser(config.redisSecret));
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: "50mb", extended: true }));
+  app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
   app.use(cors(corsOptions));
 
   passport.use(new LocalStrategy(User.authenticate()));
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
 
-  app.use(session({
-    name: 'session-id',
-    secret: '123-456-789',
-    saveUninitialized: false,
-    resave: false
-  }));
+  app.use(
+    session({
+      name: "session-id",
+      secret: "123-456-789",
+      saveUninitialized: false,
+      resave: false,
+    })
+  );
 
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(responseEnhancer.responseEnhancer())
+  app.use(responseEnhancer.responseEnhancer());
   return app;
 };
 
