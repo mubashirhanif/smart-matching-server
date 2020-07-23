@@ -28,6 +28,7 @@ const development = {
   mongoUrl: process.env.MONGO_LINK,
   clientStaticFolder: path.join(basePath, "client/static"),
   clientBuildFolder: path.join(basePath, "client/"),
+  serverUploadsFolder: path.join(basePath, "pubic/"),
 };
 
 /**
@@ -44,6 +45,7 @@ const production = {
   mongoUrl: process.env.MONGO_LINK,
   clientStaticFolder: path.join(basePath, "client/static"),
   clientBuildFolder: path.join(basePath, "client/"),
+  serverUploadsFolder: path.join(basePath, "public/"),
 };
 
 
@@ -62,6 +64,7 @@ const test = {
   mongoUrl: process.env.MONGO_LINK,
   clientStaticFolder: path.join(basePath, "client/static"),
   clientBuildFolder: path.join(basePath, "client/"),
+  serverUploadsFolder: path.join(basePath, "pubic/"),
 };
 
 const config = {
